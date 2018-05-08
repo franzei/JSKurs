@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width:500">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+
+	function handleMotionEvent(event) {
+
+    var x = event.accelerationIncludingGravity.x;
+    var y = event.accelerationIncludingGravity.y;
+    var z = event.accelerationIncludingGravity.z;
+
+		$('#output').html('X:'+x+'<br>y'+y+'<br>z'+z);
+
+
+
+    // Do something awesome.
+}
+
+window.addEventListener("devicemotion", handleMotionEvent, true);
+
+
+
+
+$( document ).ready( function() {
+	if (!('ondevicemotion' in window) ) {
+
+$('#output').html('Kein devicemotion möglich');
+});
+
+});
+
+	</script>
+	<style>
+	#output { border: 2px solid black; width:  }
+		</style>
+<body>
+<div id="output"></div>
+
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<script src="jquery-3.3.1.min.js"></script>
+	<script>
+	 var i=0;
+	var bilder = [
+		'das-paradies-fuer-wintersportler.jpg',
+		'endlos-weite-schwuenge-ueber-perfekt-praeparierte-pisten-ziehen.jpg',
+		'erlebnishotel-fendels-familienhit.jpg',
+		'fruehlings-special-top-of-tyrol.jpg'
+	];
+
+$( document ).ready( function() {
+	$('#bilder').append(
+		$('<img>').attr('src', 'tirolbilder/'+bilder[0]) );
+var startX;
+
+$('#bilder').on('touchstart', function( event ){
+//ermittle Position vom Finger
+		startX = event.originalEvent.touches[0].clientX;
+	console.log( event.originalEvent.touches[0].clientX );
+});
+
+$('#bilder').on('touchend', function(event){
+// berechne ob Finger nach links oder rechts
+		var endX = event.originalEvent.changedTouches[0].clientX;
+			if ( endX - startX < 0 ) $(this).trigger('wischlinks');
+//		if ( endX - startX < 0 ) console.log('nach links');
+		else if ( endX - startX > 0 ) $(this).trigger('wischrechts');
+
+
+});
+$('#bilder').on('wischlinks', function(){
+   var i=0;
+	for (var i in bilder)
+$('img', this).attr('src', 'tirolbilder/'+bilder[i++] );
+
+})
+
+$('#bilder').on('wischrechts', function(){
+$('img', this).attr('src', 'tirolbilder/'+bilder[1] );
+
+})
+
+});
+
+	</script>
+	<style>
+	img { vertical-align:bottom; }
+	#bilder {boder: 1px solid black; display: inline-block;}
+	#bilder img {width: 400px; height: 400px;}
+		</style>
+<body>
+
+<div id="bilder"></div>
+
+
+</body>
+</html>
